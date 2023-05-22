@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Express Practice</title>
+        <style>
+            *{
+                font-family: monospace;
+                background-color: peachpuff;
+            }
+            h1{
+                text-align: center;
+            }
+            .container{
+                text-align: center;
+            }
+            #movieNames{
+                list-style-type: none;
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <h1>Fun Movie List</h1>
+            <p id='movieNames'>
+            </p>
+    </div>
+    </body>
+    <script>
+        movieList = document.getElementById('movieNames');
+
+        fetch('http://localhost:3000/abc/api/movies/')
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            data.forEach(movie => {
+                const markup = `${movie.name}<br>`;
+
+                movieList.insertAdjacentHTML('beforeend', markup);
+            })
+        })
+        .catch(error => console.log(error));
+    </script>
+</html>
